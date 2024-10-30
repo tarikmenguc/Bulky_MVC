@@ -1,6 +1,7 @@
 ﻿using BulkyWeb.Data;
 using BulkyWeb.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BulkyWeb.Controllers
 {
@@ -31,6 +32,7 @@ namespace BulkyWeb.Controllers
             if (ModelState.IsValid) {
                 _db.Categories.Add(obj);
                 _db.SaveChanges();
+                TempData["Sucsess"]= "Category Create Sucsessfully";
                 return RedirectToAction("Index");
             }
            
@@ -60,8 +62,40 @@ namespace BulkyWeb.Controllers
             {
                 _db.Categories.Update(obj);
                 _db.SaveChanges();
+                TempData["Sucsess"] = "Category Edit Sucsessfully";
                 return RedirectToAction("Index");
             }
+
+            return View();
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            Category categoryfromdb = _db.Categories.Find(id);
+            if (categoryfromdb == null)
+            {
+                return NotFound();
+            }
+            return View(categoryfromdb);
+        }
+        [HttpPost,ActionName("Delete")]
+        public IActionResult DeletePost(int? id)
+        {
+            Category? obj = _db.Categories.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _db.Categories.Remove(obj);
+            _db.SaveChanges();
+            TempData["Sucsess"] = "Category Delete Sucsessfully";
+            return RedirectToAction("Index");
+
+           
 
             return View();
         }
