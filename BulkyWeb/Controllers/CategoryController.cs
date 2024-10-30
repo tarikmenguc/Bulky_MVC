@@ -32,7 +32,7 @@ namespace BulkyWeb.Controllers
             if (ModelState.IsValid) {
                 _db.Categories.Add(obj);
                 _db.SaveChanges();
-                TempData["Sucsess"]= "Category Create Sucsessfully";
+                TempData["Success"]= "Category Create Sucsessfully";
                 return RedirectToAction("Index");
             }
            
@@ -62,7 +62,7 @@ namespace BulkyWeb.Controllers
             {
                 _db.Categories.Update(obj);
                 _db.SaveChanges();
-                TempData["Sucsess"] = "Category Edit Sucsessfully";
+                TempData["Success"] = "Category Update Sucsessfully";
                 return RedirectToAction("Index");
             }
 
@@ -92,12 +92,12 @@ namespace BulkyWeb.Controllers
             }
             _db.Categories.Remove(obj);
             _db.SaveChanges();
-            TempData["Sucsess"] = "Category Delete Sucsessfully";
+            TempData["Success"] = "Category Delete Sucsessfully";
             return RedirectToAction("Index");
 
            
 
-            return View();
+            //return View();
         }
     }
 }
