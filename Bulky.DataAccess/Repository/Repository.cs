@@ -13,14 +13,14 @@ namespace Bulky.DataAccess.Repository
     public class Repository<T> : IRepository<T> where T : class
     {
 
-        private readonly ApplicationDbContext _db;
+        protected readonly ApplicationDbContext _db;
         internal DbSet<T> dbSet;
         public Repository(ApplicationDbContext db)
         {
             _db = db;
             this.dbSet = _db.Set<T>();
             //_db.Categories == dbSet
-            //_db.Products.Include(u => u.Category).Include(u => u.CategoryId);
+           
 
         }
 
